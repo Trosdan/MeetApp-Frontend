@@ -1,14 +1,16 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-// import { Container } from './styles';
+
+import { Wrapper } from './styles';
+import Header from '~/components/Header';
 
 export default function DefaultLayout({ children }) {
   return (
-    <>
-      <h1>default</h1>
+    <Wrapper>
+      <Header />
       {children}
-    </>
+    </Wrapper>
   );
 }
 
