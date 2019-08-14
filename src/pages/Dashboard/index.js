@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+
+import { meetupsLoadRequest } from '~/store/modules/meetup/actions';
 
 import { Container, DashboardHeader, MeetupList } from './styles';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  const { meetups } = useSelector(state => state.meetup);
+
+  useEffect(() => {
+    dispatch(meetupsLoadRequest());
+  }, [dispatch]);
+
   return (
     <Container>
       <DashboardHeader>
@@ -18,26 +28,13 @@ export default function Dashboard() {
         </aside>
       </DashboardHeader>
       <MeetupList>
-        <div>
-          <h3>Meetup</h3>
-          <h4>12 de Agosto, as 14h</h4>
-          <MdChevronRight size={28} color="#fff" />
-        </div>
-        <div>
-          <h3>Meetup</h3>
-          <h4>12 de Agosto, as 14h</h4>
-          <MdChevronRight size={28} color="#fff" />
-        </div>
-        <div>
-          <h3>Meetup</h3>
-          <h4>12 de Agosto, as 14h</h4>
-          <MdChevronRight size={28} color="#fff" />
-        </div>
-        <div>
-          <h3>Meetup</h3>
-          <h4>12 de Agosto, as 14h</h4>
-          <MdChevronRight size={28} color="#fff" />
-        </div>
+        {meetups.map(meetup => (
+          <div key={meetup.id}>
+            <h3>{meetup.title}</h3>
+            <h4>{meetup.dateFormat}</h4>
+            <MdChevronRight size={28} color="#fff" />
+          </div>
+        ))}
       </MeetupList>
     </Container>
   );
