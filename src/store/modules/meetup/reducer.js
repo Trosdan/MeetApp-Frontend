@@ -2,6 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   meetups: [],
+  meetup: {},
   loading: false,
 };
 
@@ -16,6 +17,17 @@ export default function Meetup(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       case '@meetup/MEETUPS_LOAD_FAILURE':
+        draft.loading = false;
+        break;
+
+      case '@meetup/MEETUP_LOAD_REQUEST':
+        draft.loading = true;
+        break;
+      case '@meetup/MEETUP_LOAD_SUCCESS':
+        draft.meetup = action.payload;
+        draft.loading = false;
+        break;
+      case '@meetup/MEETUP_LOAD_FAILURE':
         draft.loading = false;
         break;
       default:

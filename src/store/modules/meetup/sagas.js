@@ -3,9 +3,14 @@ import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
 import api from '~/services/api';
-import { meetupsLoadSuccess, meetupsLoadFailure } from './actions';
+import {
+  meetupsLoadSuccess,
+  meetupsLoadFailure,
+  meetupLoadSuccess,
+  meetupLoadFailure,
+} from './actions';
 
-export function* loadRequest() {
+export function* meetupsloadRequest() {
   try {
     const response = yield call(api.get, 'meetup');
     const data = response.data.map(meetup => {
@@ -22,4 +27,22 @@ export function* loadRequest() {
   }
 }
 
-export default all([takeLatest('@meetup/MEETUPS_LOAD_REQUEST', loadRequest)]);
+export function* meetuploadRequest({ payload: id }) {
+  try {
+    console.tron.log(id);
+    const response = yield call(api.get, `meetup/${id}`);
+    const dateFormat = format(response.data.date, 'DD [de] MMMM[, às ]HH[h]', {
+      locale: pt,
+    });
+    yield put(meetupLoadSuccess({ ...response.data, dateFormat }));
+  } catch (err) {
+    console.tron.error(err);
+    toast.error('Não foi possivel carregar os Meetups');
+    yield put(meetupLoadFailure());
+  }
+}
+
+export default all([
+  takeLatest('@meetup/MEETUPS_LOAD_REQUEST', meetupsloadRequest),
+  takeLatest('@meetup/MEETUP_LOAD_REQUEST', meetuploadRequest),
+]);

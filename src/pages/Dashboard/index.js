@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import { meetupsLoadRequest } from '~/store/modules/meetup/actions';
 
@@ -29,11 +30,13 @@ export default function Dashboard() {
       </DashboardHeader>
       <MeetupList>
         {meetups.map(meetup => (
-          <div key={meetup.id}>
-            <h3>{meetup.title}</h3>
-            <h4>{meetup.dateFormat}</h4>
-            <MdChevronRight size={28} color="#fff" />
-          </div>
+          <Link key={meetup.id} to={`meetup/${meetup.id}`}>
+            <div>
+              <h3>{meetup.title}</h3>
+              <h4>{meetup.dateFormat}</h4>
+              <MdChevronRight size={28} color="#fff" />
+            </div>
+          </Link>
         ))}
       </MeetupList>
     </Container>
