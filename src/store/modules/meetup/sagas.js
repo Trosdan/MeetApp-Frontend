@@ -27,16 +27,14 @@ export function* meetupsloadRequest() {
   }
 }
 
-export function* meetuploadRequest({ payload: id }) {
+export function* meetuploadRequest({ payload: { id } }) {
   try {
-    console.tron.log(id);
     const response = yield call(api.get, `meetup/${id}`);
     const dateFormat = format(response.data.date, 'DD [de] MMMM[, às ]HH[h]', {
       locale: pt,
     });
     yield put(meetupLoadSuccess({ ...response.data, dateFormat }));
   } catch (err) {
-    console.tron.error(err);
     toast.error('Não foi possivel carregar os Meetups');
     yield put(meetupLoadFailure());
   }

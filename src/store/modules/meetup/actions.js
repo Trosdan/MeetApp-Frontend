@@ -6,7 +6,7 @@ export function meetupsLoadRequest() {
 export function meetupsLoadSuccess(meetups) {
   return {
     type: '@meetup/MEETUPS_LOAD_SUCCESS',
-    payload: meetups,
+    payload: { meetups },
   };
 }
 export function meetupsLoadFailure() {
@@ -18,13 +18,13 @@ export function meetupsLoadFailure() {
 export function meetupLoadRequest(id) {
   return {
     type: '@meetup/MEETUP_LOAD_REQUEST',
-    payload: id,
+    payload: { id },
   };
 }
 export function meetupLoadSuccess(meetup) {
   return {
     type: '@meetup/MEETUP_LOAD_SUCCESS',
-    payload: meetup,
+    payload: { meetup },
   };
 }
 export function meetupLoadFailure() {

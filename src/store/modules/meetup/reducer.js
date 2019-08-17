@@ -13,7 +13,7 @@ export default function Meetup(state = INITIAL_STATE, action) {
         draft.loading = true;
         break;
       case '@meetup/MEETUPS_LOAD_SUCCESS':
-        draft.meetups = action.payload;
+        draft.meetups = action.payload.meetups;
         draft.loading = false;
         break;
       case '@meetup/MEETUPS_LOAD_FAILURE':
@@ -24,7 +24,7 @@ export default function Meetup(state = INITIAL_STATE, action) {
         draft.loading = true;
         break;
       case '@meetup/MEETUP_LOAD_SUCCESS':
-        draft.meetup = action.payload;
+        draft.meetup = action.payload.meetup;
         draft.loading = false;
         break;
       case '@meetup/MEETUP_LOAD_FAILURE':
