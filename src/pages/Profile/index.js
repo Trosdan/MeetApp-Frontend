@@ -4,11 +4,15 @@ import { Form, Input } from '@rocketseat/unform';
 
 import { Container } from './styles';
 
+import { updateProfileRequest } from '~/store/modules/user/actions';
+
 export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
 
-  function handleSubmit(data) {}
+  function handleSubmit(data) {
+    dispatch(updateProfileRequest(data));
+  }
 
   return (
     <Container>
