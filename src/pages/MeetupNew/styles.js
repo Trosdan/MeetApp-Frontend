@@ -12,6 +12,10 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: 30px;
 
+    .description {
+      height: 100px;
+    }
+
     input {
       border: 0;
       border-radius: 4px;

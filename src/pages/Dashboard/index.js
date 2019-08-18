@@ -22,10 +22,12 @@ export default function Dashboard() {
           <h2>Meus meetups</h2>
         </nav>
         <aside>
-          <button type="button">
-            <MdAddCircleOutline size={28} color="#fff" />
-            Novo meetup
-          </button>
+          <Link to="/meetupEdit">
+            <button type="button">
+              <MdAddCircleOutline size={28} color="#fff" />
+              Novo meetup
+            </button>
+          </Link>
         </aside>
       </DashboardHeader>
       <MeetupList>

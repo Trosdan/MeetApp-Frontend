@@ -2,7 +2,11 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   meetups: [],
-  meetup: {},
+  meetup: {
+    file: {
+      url: 'http://localhost:3333/files/ebf932bf987f0e91460eb6e055857ebd.jpg',
+    },
+  },
   loading: false,
 };
 

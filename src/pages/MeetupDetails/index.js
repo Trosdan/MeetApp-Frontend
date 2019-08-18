@@ -9,7 +9,10 @@ import {
 import PropTypes from 'prop-types';
 import history from '~/services/history';
 
-import { meetupLoadRequest } from '~/store/modules/meetup/actions';
+import {
+  meetupLoadRequest,
+  meetupDeleteRequest,
+} from '~/store/modules/meetup/actions';
 
 import { Container, MeetupHeader, MeetupContent, MeetupFooter } from './styles';
 
@@ -25,6 +28,10 @@ export default function MeetupDetails({ match }) {
     history.push('/meetupEdit', meetup);
   }
 
+  function handlerDelete() {
+    dispatch(meetupDeleteRequest(match.params.id));
+  }
+
   return (
     <Container>
       <MeetupHeader>
@@ -33,14 +40,17 @@ export default function MeetupDetails({ match }) {
           <MdEdit size={18} />
           Editar
         </button>
-        <button className="excluir" type="button">
+        <button className="excluir" onClick={handlerDelete} type="button">
           <MdDelete size={18} />
           Excluir
         </button>
       </MeetupHeader>
       <MeetupContent>
         <img
-          src="http://localhost:3333/files/ebf932bf987f0e91460eb6e055857ebd.jpg"
+          src={
+            meetup.file.url ||
+            'https://api.adorable.io/avatars/50/abott@adorable.png'
+          }
           alt="MeetupFoto"
         />
         <p>{meetup.description}</p>

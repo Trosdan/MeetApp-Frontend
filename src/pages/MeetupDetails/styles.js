@@ -44,8 +44,10 @@ export const MeetupContent = styled.div`
 
   img {
     display: block;
-    height: 300px;
+    max-width: 100%;
+    max-height: 300px;
     margin: 0 auto;
+    border-radius: 4px;
   }
 
   p {
