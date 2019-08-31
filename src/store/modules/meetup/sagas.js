@@ -1,4 +1,6 @@
-import { takeLatest, all, put, call } from 'redux-saga/effects';
+import {
+  takeLatest, all, put, call,
+} from 'redux-saga/effects';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
@@ -13,8 +15,8 @@ import {
 
 export function* meetupsloadRequest() {
   try {
-    const response = yield call(api.get, 'meetup');
-    const data = response.data.map(meetup => {
+    const response = yield call(api.get, 'organizing');
+    const data = response.data.map((meetup) => {
       const dateFormat = format(meetup.date, 'DD [de] MMMM[, às ]HH[h]', {
         locale: pt,
       });
@@ -66,7 +68,7 @@ export function* meetupDeleteRequest({ payload: { id } }) {
   try {
     yield call(api.delete, `meetup/${id}`);
     toast.success('Meetup Deletado');
-    history.push(`/`);
+    history.push('/');
   } catch (err) {
     toast.error('Não foi possivel Deletar o Meetup');
   }
